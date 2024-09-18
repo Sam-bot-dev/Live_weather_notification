@@ -13,6 +13,8 @@ CITY = 'Gandhinagar'  # Replace with your desired city
 def get_current_temperature(API_KEY, CITY):
     url = f'http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&units=metric'
     response = requests.get(url)
+    print("Response Code:", response.status_code)  # Check response code
+    print("Response Body:", response.json())  # Print the response body for debugging
     if response.status_code == 200:
         data = response.json()
         temperature = data['main']['temp']
