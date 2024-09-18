@@ -2,6 +2,7 @@
 #win10toast is used to show desktop notification
 #request is used to get the data from the website
 #bs4 is used to parse the data
+#Win10toast does not work in replit (Be carefull) and Enjoy guys :)
 import requests
 from win10toast import ToastNotifier
 from bs4 import BeautifulSoup
