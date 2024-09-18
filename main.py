@@ -4,20 +4,33 @@
 #bs4 is used to parse the data
 #Win10toast does not work in replit (Be carefull) and Enjoy guys :)
 import requests
-from win10toast import ToastNotifier
 from bs4 import BeautifulSoup
-n=ToastNotifier()
-API_KEY ="7359c53448c5e4b3c6997b6a1dab14b5x"
-def getdata(url):
-    r=requests.get(url="https://weather.com/en-IN/?Goto=Redirected")
-    return r.text
-htmldata= getdata("https://weather.com/en-IN/?Goto=Redirected")
-soup=BeautifulSoup(htmldata,"html.parser")
-current_temp=soup.find_all("span",class_="_-_-components-src-organism-CurrentConditions-CurrentConditions--tempValue--MHmYY")
-chances_rain = soup.find_all("div",  
-                             class_= "_-_-components-src-organism-CurrentConditions-CurrentConditions--precipValue--2aJSf") 
-temp = (str(current_temp))    
-temp_rain = (str(chances_rain) )
+from win10toast import ToastNotifier
+# Replace with your own OpenWeatherMap API key
 
-result = "current_temp " + temp[128:-9] + "  in Gandhinagar" + "\n" +temp_rain[131:-14] 
-n.show_toast("Weather update", result, duration = 10)
+CITY = 'Gandhinagar'  # Replace with your desired city
+
+def get_current_temperature(API_KEY, CITY):
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}&units=metric'
+    response = requests.get(url)
+    print("Response Code:", response.status_code)  # Check response code
+    print("Response Body:", response.json())  # Print the response body for debugging
+    if response.status_code == 200:
+        data = response.json()
+        temperature = data['main']['temp']
+        return temperature
+    else:
+        return None
+
+def main():
+    toaster = ToastNotifier()
+    temperature = get_current_temperature(API_KEY, CITY)
+    
+    if temperature is not None:
+        message = (f"The current temperature in {CITY} is {temperature}°C.")
+        toaster.show_toast("Current Temperature", message, duration=10)
+    else:
+        toaster.show_toast("Error", "Could not retrieve temperature data.", duration=10)
+
+if __name__ == "__main__":
+    main()
