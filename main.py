@@ -7,6 +7,7 @@ import requests
 from win10toast import ToastNotifier
 from bs4 import BeautifulSoup
 n=ToastNotifier()
+API_KEY ="7359c53448c5e4b3c6997b6a1dab14b5x"
 def getdata(url):
     r=requests.get(url="https://weather.com/en-IN/?Goto=Redirected")
     return r.text
