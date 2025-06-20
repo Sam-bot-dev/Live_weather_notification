@@ -1,5 +1,4 @@
-# 🌡️ Weather Notification App (Windows 10 Toast)
-
+# 🌡️ Weather Notification
 A simple Python script that fetches the current temperature of your chosen city using the OpenWeatherMap API and displays it as a desktop notification using Windows 10 toast alerts.
 
 ## 🔧 Technologies Used
